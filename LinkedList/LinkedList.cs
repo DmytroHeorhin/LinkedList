@@ -7,13 +7,13 @@ namespace LinkedList
     public class LinkedList<T> : IEnumerable<T>
     { 
         private readonly LinkedListNode<T> _sentinel;
-        private LinkedListNode<T> _head;
+        private LinkedListNode<T> _lastElement;
         private LinkedListNode<T> _current;
 
         public LinkedList()
         {
             _sentinel = new LinkedListNode<T>(this, default(T));
-            _head = _sentinel;
+            _lastElement = _sentinel;
         }
 
         public LinkedList(IEnumerable<T> collection) : this()
@@ -29,8 +29,8 @@ namespace LinkedList
         public T Add(T item)
         {
             var result = new LinkedListNode<T>(this, item);
-            _head.Next = result;
-            _head = result;
+            _lastElement.Next = result;
+            _lastElement = result;
             Length++;
             return result.Item;
         }
@@ -49,8 +49,8 @@ namespace LinkedList
         public bool Remove()
         {
             if (Length == 0) return false;      
-            _head = NodeAt(Length - 1);
-            _head.Next = null;
+            _lastElement = NodeAt(Length - 1);
+            _lastElement.Next = null;
             Length--;
             return true;
         }
