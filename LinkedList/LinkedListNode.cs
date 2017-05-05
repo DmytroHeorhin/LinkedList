@@ -8,8 +8,8 @@
             Item = item;
         }
 
-        public LinkedList<T> List { get; internal set; }
-        public LinkedListNode<T> Next { get; internal set; }
+        public LinkedList<T> List { get; set; }
+        public LinkedListNode<T> Next { get; set; }
         public T Item { get; set; }      
     }
 }

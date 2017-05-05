@@ -1,17 +1,27 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace LinkedList
 {
-    public class LinkedList<T>
+    public class LinkedList<T> : IEnumerable<T>
     { 
         private readonly LinkedListNode<T> _sentinel;
         private LinkedListNode<T> _head;
-        // private LinkedListNode<T> _current;
+        private LinkedListNode<T> _current;
 
         public LinkedList()
         {
             _sentinel = new LinkedListNode<T>(this, default(T));
             _head = _sentinel;
+        }
+
+        public LinkedList(IEnumerable<T> collection) : this()
+        {
+            foreach (var element in collection)
+            {
+                Add(element);
+            }
         }
         
         public int Length { get; private set; }
@@ -38,10 +48,10 @@ namespace LinkedList
 
         public bool Remove()
         {
-            if (Length == 0) return false;
-            Length--;
+            if (Length == 0) return false;      
             _head = NodeAt(Length - 1);
             _head.Next = null;
+            Length--;
             return true;
         }
 
@@ -55,6 +65,7 @@ namespace LinkedList
             var previousNode = NodeAt(index - 1);
             var nodeToDelelte = previousNode.Next;
             previousNode.Next = nodeToDelelte.Next;
+            Length--;
             return true;
         }
 
@@ -84,6 +95,21 @@ namespace LinkedList
             {
                 throw new IndexOutOfRangeException();
             }
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            _current = _sentinel;
+            while(_current.Next != null)
+            {
+                _current = _current.Next;
+                yield return _current.Item;
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }
