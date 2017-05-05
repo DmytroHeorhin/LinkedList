@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LinkedList
+﻿namespace LinkedList
 {
-    public class LinkedListNode<T>
+    internal class LinkedListNode<T>
     {
         public LinkedListNode(LinkedList<T> list, T item)
         {

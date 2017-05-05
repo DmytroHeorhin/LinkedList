@@ -1,62 +1,88 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LinkedList
 {
-    public class LinkedList<T> : IEnumerable, IEnumerator
-    {
+    public class LinkedList<T>
+    { 
+        private readonly LinkedListNode<T> _sentinel;
         private LinkedListNode<T> _head;
-        private LinkedListNode<T> _current;
+        // private LinkedListNode<T> _current;
+
+        public LinkedList()
+        {
+            _sentinel = new LinkedListNode<T>(this, default(T));
+            _head = _sentinel;
+        }
         
         public int Length { get; private set; }
-        public LinkedListNode<T> Add(T item)
+
+        public T Add(T item)
         {
             var result = new LinkedListNode<T>(this, item);
-
-            if (_head == null)
-            {
-                _head = result;
-                Length = 1;
-                return result;
-            }      
-
-            
+            _head.Next = result;
+            _head = result;
+            Length++;
+            return result.Item;
         }
 
-        public IEnumerator GetEnumerator()
+        public T AddAt(T item, int index)
         {
-            return this;
+            ValidateIndex(index);
+            var result = new LinkedListNode<T>(this, item);
+            var previousNode = NodeAt(index - 1);
+            result.Next = previousNode.Next;
+            previousNode.Next = result;
+            Length++;
+            return result.Item;
         }
 
-        public bool MoveNext()
+        public bool Remove()
         {
-            if(_current.Next == null)
-            {
-                return false;
-            }
-            _current = _current.Next;
+            if (Length == 0) return false;
+            Length--;
+            _head = NodeAt(Length - 1);
+            _head.Next = null;
             return true;
         }
 
-        public void Reset()
+        public bool RemoveAt(int index)
         {
-            _current = default();
-        }
-
-        private LinkedListNode<T> GetLast
-        {
-            
-        }
-
-        public object Current
-        {
-            get
+            if (index < 0 || index > Length - 1)
             {
-                throw new NotImplementedException();
+                return false;
+            }
+
+            var previousNode = NodeAt(index - 1);
+            var nodeToDelelte = previousNode.Next;
+            previousNode.Next = nodeToDelelte.Next;
+            return true;
+        }
+
+        public T ElementAt(int index)
+        {
+            ValidateIndex(index);
+            var result = NodeAt(index);      
+            return result.Item;
+        }
+
+        private LinkedListNode<T> NodeAt(int index)
+        {
+            var i = -1;
+            var result = _sentinel;
+
+            while (i++ < index)
+            {
+                result = result.Next;
+            } 
+
+            return result;
+        }
+
+        private void ValidateIndex(int index)
+        {
+            if (index < 0 || index > Length - 1)
+            {
+                throw new IndexOutOfRangeException();
             }
         }
     }
