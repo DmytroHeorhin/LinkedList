@@ -103,7 +103,7 @@ namespace LinkedList.Tests
         }
 
         [TestMethod]
-        public void AddAt_ShouldIncreaseLengthAndStoreItemInTheSpecifiedPosition()
+        public void AddAt_IndexisValid_ShouldIncreaseLengthAndStoreItemInTheSpecifiedPosition()
         {
             var sut = new LinkedList<string> { "test1", "test2", "test3", "test4" };
             var item = "test";
@@ -146,7 +146,7 @@ namespace LinkedList.Tests
         }
 
         [TestMethod]
-        public void RemoveAt_ShouldDecreaseLengthAndDeleteItemfromTheSpecifiedPosition()
+        public void RemoveAt_IndexIsValid_ShouldDecreaseLengthAndDeleteItemfromTheSpecifiedPosition()
         {
             var item = "test";
             var sut = new LinkedList<string> { "test1", "test2", item, "test3", "test4" };
