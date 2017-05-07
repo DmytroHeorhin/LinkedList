@@ -57,9 +57,13 @@ namespace LinkedList
 
         public bool RemoveAt(int index)
         {
-            if (index < 0 || index > Length - 1)
+            if (index > Length - 1)
             {
                 return false;
+            }
+            if (index < 0)
+            {
+                throw new IndexOutOfRangeException();
             }
 
             var previousNode = NodeAt(index - 1);

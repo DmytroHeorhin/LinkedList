@@ -35,6 +35,7 @@ namespace LinkedList.Tests
         public void ElementAt_IndexIsGreaterThenLastElementIndex_ShouldThrowIndexOutOfRange()
         {
             var sut = new LinkedList<string> {"test1", "test2"};
+            Exception exception = null;
 
             try
             {
@@ -42,14 +43,17 @@ namespace LinkedList.Tests
             }
             catch (Exception ex)
             {
-                Assert.IsInstanceOfType(ex, typeof(IndexOutOfRangeException));
-            }        
+                exception = ex;
+            }
+
+            Assert.IsInstanceOfType(exception, typeof(IndexOutOfRangeException));
         }
 
         [TestMethod]
         public void ElementAt_IndexIsLessThenZero_ShouldThrowIndexOutOfRange()
         {
             var sut = new LinkedList<string> { "test1", "test2" };
+            Exception exception = null;
 
             try
             {
@@ -57,8 +61,10 @@ namespace LinkedList.Tests
             }
             catch (Exception ex)
             {
-                Assert.IsInstanceOfType(ex, typeof(IndexOutOfRangeException));
+                exception = ex;
             }
+
+            Assert.IsInstanceOfType(exception, typeof(IndexOutOfRangeException));
         }
 
         [TestMethod]
@@ -76,6 +82,7 @@ namespace LinkedList.Tests
         public void AddAt_IndexIsGreaterThenLastElementIndex_ShouldThrowIndexOutOfRange()
         {
             var sut = new LinkedList<string> { "test1", "test2" };
+            Exception exception = null;
 
             try
             {
@@ -83,14 +90,17 @@ namespace LinkedList.Tests
             }
             catch (Exception ex)
             {
-                Assert.IsInstanceOfType(ex, typeof(IndexOutOfRangeException));
+                exception = ex;
             }
+
+            Assert.IsInstanceOfType(exception, typeof(IndexOutOfRangeException));
         }
 
         [TestMethod]
         public void AddAt_IndexIsLessThenZero_ShouldThrowIndexOutOfRange()
         {
             var sut = new LinkedList<string> { "test1", "test2" };
+            Exception exception = null;
 
             try
             {
@@ -98,8 +108,10 @@ namespace LinkedList.Tests
             }
             catch (Exception ex)
             {
-                Assert.IsInstanceOfType(ex, typeof(IndexOutOfRangeException));
+                exception = ex;
             }
+
+            Assert.IsInstanceOfType(exception, typeof(IndexOutOfRangeException));
         }
 
         [TestMethod]
@@ -120,20 +132,16 @@ namespace LinkedList.Tests
         {
             var sut = new LinkedList<string> { "test1", "test2" };
 
-            try
-            {
-                sut.RemoveAt(2);
-            }
-            catch (Exception ex)
-            {
-                Assert.IsInstanceOfType(ex, typeof(IndexOutOfRangeException));
-            }
+            var result = sut.RemoveAt(2);
+
+            Assert.IsFalse(result);
         }
 
         [TestMethod]
         public void RemoveAt_IndexIsLessThenZero_ShouldThrowIndexOutOfRange()
         {
             var sut = new LinkedList<string> { "test1", "test2" };
+            Exception exception = null;
 
             try
             {
@@ -141,8 +149,10 @@ namespace LinkedList.Tests
             }
             catch (Exception ex)
             {
-                Assert.IsInstanceOfType(ex, typeof(IndexOutOfRangeException));
+                exception = ex;
             }
+
+            Assert.IsInstanceOfType(exception, typeof(IndexOutOfRangeException));
         }
 
         [TestMethod]
