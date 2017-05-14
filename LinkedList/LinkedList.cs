@@ -8,7 +8,6 @@ namespace LinkedList
     { 
         private readonly LinkedListNode<T> _sentinel;
         private LinkedListNode<T> _lastElement;
-        private LinkedListNode<T> _current;
 
         public LinkedList()
         {
@@ -103,11 +102,11 @@ namespace LinkedList
 
         public IEnumerator<T> GetEnumerator()
         {
-            _current = _sentinel;
-            while(_current.Next != null)
+            var current = _sentinel;
+            while(current.Next != null)
             {
-                _current = _current.Next;
-                yield return _current.Item;
+                current = current.Next;
+                yield return current.Item;
             }
         }
 
